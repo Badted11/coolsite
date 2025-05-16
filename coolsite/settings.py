@@ -8,7 +8,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Безопасность
 SECRET_KEY = '!@@kor(4f034ph@e7$h-%4u3^@6va-=&*vstqn@1eql#xggj*n'
 DEBUG = True
-ALLOWED_HOSTS = ['coolsite-iw4y.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['coolsite-8r8e.onrender.com', 'localhost', '127.0.0.1']
+
 
 
 # Приложения
