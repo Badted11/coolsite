@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import dj_database_url  # Для работы с базами данных на хостинге
 
 # Базовая директория проекта
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,12 +20,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'weather',
-    'debug_toolbar',  # Для отладки
+    'debug_toolbar',  # Для отладки на локальном сервере
 ]
 
 # Middleware
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',  # Debug Toolbar первым!
+    'debug_toolbar.middleware.DebugToolbarMiddleware',  # Для локальной отладки
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -57,12 +58,9 @@ TEMPLATES = [
 # WSGI
 WSGI_APPLICATION = 'coolsite.wsgi.application'
 
-# База данных
+# База данных (SQLite для локальной разработки, PostgreSQL для Render)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(default=f"sqlite:///{BASE_DIR}/db.sqlite3")
 }
 
 # Проверка паролей
@@ -84,26 +82,30 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'main/static'),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Медиа (изображения)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Кэширование (файловое)
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': os.path.join(BASE_DIR, 'coolsite_cache'),
-    }
-}
+# Дополнительные настройки для Render
+if not DEBUG:
+    # Настройки безопасности для хостинга
+    ALLOWED_HOSTS = ['your-app-name.onrender.com']
+    CSRF_TRUSTED_ORIGINS = ['https://your-app-name.onrender.com']
+
+    # Настройки статики для Render
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
+    # Для использования HTTPS
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Редиректы
-LOGIN_REDIRECT_URL = '/weather/'        # После входа
-LOGOUT_REDIRECT_URL = '/weather/login/' # После выхода
+LOGIN_REDIRECT_URL = '/weather/'
+LOGOUT_REDIRECT_URL = '/weather/login/'
 
-# Debug Toolbar (ограничен локальным IP)
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+# Debug Toolbar (только локально)
+INTERNAL_IPS = ['127.0.0.1']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
