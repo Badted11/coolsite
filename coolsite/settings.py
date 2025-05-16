@@ -8,7 +8,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Безопасность
 SECRET_KEY = 'django-insecure-f@zw)8ss@@hmp%xv-by^^8*a3vn&x+h^-zc8fe8#)uv$0gp^us'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['coolsite-iw4y.onrender.com', 'localhost', '127.0.0.1']
+
 
 # Приложения
 INSTALLED_APPS = [
