@@ -6,8 +6,8 @@ import dj_database_url  # Для работы с базами данных на 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Безопасность
-SECRET_KEY = 'django-insecure-f@zw)8ss@@hmp%xv-by^^8*a3vn&x+h^-zc8fe8#)uv$0gp^us'
-DEBUG = True
+SECRET_KEY = '!@@kor(4f034ph@e7$h-%4u3^@6va-=&*vstqn@1eql#xggj*n'
+DEBUG = False
 ALLOWED_HOSTS = ['coolsite-iw4y.onrender.com', 'localhost', '127.0.0.1']
 
 
