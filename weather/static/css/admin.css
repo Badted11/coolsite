@@ -1,0 +1,15 @@
+/* Стили для админ-панели */
+#header, .module caption {
+    background: #1b3d75 !important;
+    color: white;
+}
+
+#user-tools {
+    background: #1b3d75;
+    padding: 5px 10px;
+}
+
+.module caption {
+    font-weight: bold;
+    font-size: 16px;
+}

@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('../img/weather_bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.weather-icon {
+    font-size: 60px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+
+button {
+    background: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #003d82;
+}
+
+.custom-navbar {
+    background: rgba(0, 0, 50, 0.8);
+    padding: 10px 15px;
+    backdrop-filter: blur(5px);
+    border-bottom: 2px solid #ffffff33;
+}
+
+
+.custom-navbar .nav-link {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s;
+    padding: 8px 15px;
+}
+
+
+.custom-navbar .nav-link:hover {
+    color: #FFD700;
+    transform: scale(1.1);
+}
+
+
+.custom-navbar .navbar-brand {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    transition: 0.3s;
+}
+
+
+.custom-navbar .navbar-brand:hover {
+    color: #FFD700;
+}
+
+
+.custom-navbar::after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(to right, #FFD700, transparent);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+

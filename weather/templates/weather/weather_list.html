@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список прогнозов погоды</title>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .weather-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">📋 Список прогнозов погоды</h1>
+
+        <div class="text-center mb-4">
+            <a href="{% url 'weather_create' %}" class="btn btn-success">➕ Добавить новый прогноз</a>
+            <a href="/" class="btn btn-secondary">⬅️ На главную</a>
+        </div>
+
+
+        <div class="row">
+            {% for weather in weather_data %}
+                <div class="col-md-4">
+                    <div class="weather-card text-center">
+                        <h3>{{ weather.city }}</h3>
+                        <p>🌡️ {{ weather.temperature|floatformat:1 }}°C</p>
+                        <p>📝 {{ weather.description }}</p>
+                        <p class="text-muted">📅 {{ weather.date_checked|date:"d M Y H:i" }}</p>
+
+                        <div class="mt-3">
+                            <a href="{% url 'weather_update' weather.pk %}" class="btn btn-primary btn-sm">✏️ Редактировать</a>
+                            <a href="{% url 'weather_delete' weather.pk %}" class="btn btn-danger btn-sm">🗑️ Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-center">Нет прогнозов погоды.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
